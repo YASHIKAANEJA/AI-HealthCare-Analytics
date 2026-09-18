@@ -1,0 +1,162 @@
+-- create database
+create database hospital_db;
+
+-- create schema
+create schema hospital_db_schema;
+
+-- CREATE TABLES
+
+-- CREATE TABLE ORGANIZATIONS
+create table organizations(
+Id VARCHAR(200) PRIMARY KEY,
+NAME VARCHAR(100),
+ADDRESS VARCHAR(50),
+CITY VARCHAR(50),
+STATE VARCHAR(50),
+ZIP INT,
+LAT DOUBLE,
+LON DOUBLE );
+
+-- CREATE TABLE PATIENTS
+CREATE TABLE patients(
+Id VARCHAR(200) PRIMARY KEY,
+BIRTHDATE DATE,
+DEATHDATE DATE,
+PREFIX VARCHAR(10),
+FIRST VARCHAR(40),
+LAST VARCHAR(50),
+SUFFIX VARCHAR(10),
+MAIDEN VARCHAR(10),
+MARITAL	VARCHAR(10),
+RACE VARCHAR(10),
+ETHNICITY VARCHAR(20),
+GENDER VARCHAR(10),
+BIRTHPLACE VARCHAR(100),
+ADDRESS	VARCHAR(100),
+CITY VARCHAR(100),
+STATE VARCHAR(100),
+COUNTY VARCHAR(100),
+ZIP	INT,
+LAT	DOUBLE,
+LON DOUBLE
+);
+
+ALTER TABLE patients MODIFY COLUMN MAIDEN VARCHAR(20);
+
+-- CREATE TABLE PAYERS
+CREATE TABLE PAYERS(
+Id VARCHAR(100) PRIMARY KEY,
+NAME VARCHAR(20),
+ADDRESS VARCHAR(30),
+CITY VARCHAR(20),
+STATE_HEADQUARTERED	VARCHAR(10),
+ZIP	INT,
+PHONE VARCHAR(30)
+);
+
+
+ALTER TABLE payers MODIFY COLUMN NAME VARCHAR(30);
+
+
+
+-- CREATE TABLE ENCOUNTERS
+CREATE TABLE ENCOUNTERS (
+    ID VARCHAR(200) PRIMARY KEY,
+    "START" TIMESTAMP,
+    "STOP" TIMESTAMP,
+    PATIENT VARCHAR(200),
+    ORGANIZATION VARCHAR(200),
+    PAYER VARCHAR(100),
+    ENCOUNTERCLASS VARCHAR(50),
+    CODE INT,
+    DESCRIPTION VARCHAR(200),
+    BASE_ENCOUNTER_COST FLOAT,
+    TOTAL_CLAIM_COST FLOAT,
+    PAYER_COVERAGE FLOAT,
+    REASONCODE INT,
+    REASONDESCRIPTION VARCHAR(200),
+
+    FOREIGN KEY (PATIENT)
+        REFERENCES PATIENTS(ID),
+
+    FOREIGN KEY (ORGANIZATION)
+        REFERENCES ORGANIZATIONS(ID),
+
+    FOREIGN KEY (PAYER)
+        REFERENCES PAYERS(ID)
+);
+
+-- CREATE TABLE PROCEDURES
+CREATE TABLE procedures(
+"START" timestamp, 
+"STOP" timestamp,	
+PATIENT VARCHAR(200),
+ENCOUNTER VARCHAR(200),
+CODE DOUBLE,
+DESCRIPTION	VARCHAR(200),
+BASE_COST INT,
+REASONCODE INT,
+REASONDESCRIPTION VARCHAR(200),
+FOREIGN KEY (PATIENT)
+        REFERENCES PATIENTS(Id),
+FOREIGN KEY (ENCOUNTER)
+        REFERENCES ENCOUNTERS(ID)
+);
+
+--create a FILE FORMAT
+CREATE OR REPLACE FILE FORMAT CSV_SOURCE_FILE_FORMAT
+TYPE = 'CSV'
+SKIP_HEADER=1
+FIELD_OPTIONALLY_ENCLOSED_BY = '"'
+DATE_FORMAT = 'YYYY-MM-DD';
+
+CREATE OR REPLACE STAGE TESTSTAGE;
+
+-- LOAD DATA INTO THE TABLES USING SNOWSQL
+
+-- PUT 'file://C:/Users/GOD/OneDrive/Documents/DATA ANALYST 2026/HealthCare Analysis/Hospital+Patient+Records/organizations.csv' @hospital_db.hospital_db_schema.TESTSTAGE/organizations/ AUTO_COMPRESS=FALSE;
+
+-- PUT 'file://C:/Users/GOD/OneDrive/Documents/DATA ANALYST 2026/HealthCare Analysis/Hospital+Patient+Records/procedures.csv' @hospital_db.hospital_db_schema.TESTSTAGE/procedures/ AUTO_COMPRESS=FALSE;
+
+-- PUT 'file://C:/Users/GOD/OneDrive/Documents/DATA ANALYST 2026/HealthCare Analysis/Hospital+Patient+Records/patients.csv' @hospital_db.hospital_db_schema.TESTSTAGE/patients/ AUTO_COMPRESS=FALSE;
+
+-- PUT 'file://C:/Users/GOD/OneDrive/Documents/DATA ANALYST 2026/HealthCare Analysis/Hospital+Patient+Records/payers.csv' @hospital_db.hospital_db_schema.TESTSTAGE/payers/ AUTO_COMPRESS=FALSE;
+
+-- PUT 'file://C:/Users/GOD/OneDrive/Documents/DATA ANALYST 2026/HealthCare Analysis/Hospital+Patient+Records/encounters.csv' @hospital_db.hospital_db_schema.TESTSTAGE/encounters/ AUTO_COMPRESS=FALSE;
+
+select * from organizations;
+select * from payers;
+select * from patients;
+select * from procedures;
+select * from encounters;
+
+-- COPY ALL THE DATA FROM STAGE TO RESPECTIVE TABLES
+
+COPY INTO organizations from @hospital_db.hospital_db_schema.TESTSTAGE/organizations/organizations.csv
+FILE_FORMAT = (FORMAT_NAME = 'CSV_SOURCE_FILE_FORMAT');
+
+COPY INTO payers from @hospital_db.hospital_db_schema.TESTSTAGE/payers/payers.csv
+FILE_FORMAT = (FORMAT_NAME = 'CSV_SOURCE_FILE_FORMAT');
+
+COPY INTO patients from @hospital_db.hospital_db_schema.TESTSTAGE/patients/patients.csv
+FILE_FORMAT = (FORMAT_NAME = 'CSV_SOURCE_FILE_FORMAT');
+
+COPY INTO encounters from @hospital_db.hospital_db_schema.TESTSTAGE/encounters/encounters.csv
+FILE_FORMAT = (FORMAT_NAME = 'CSV_SOURCE_FILE_FORMAT');
+
+COPY INTO procedures from @hospital_db.hospital_db_schema.TESTSTAGE/procedures/procedures.csv
+FILE_FORMAT = (FORMAT_NAME = 'CSV_SOURCE_FILE_FORMAT');
+
+-- CREATE A NEW USER THAT WILL BE USEFUL WHILE CONNECTING TO POWERBI
+CREATE OR REPLACE USER Test_PowerBI_User
+    PASSWORD = 'Test_PowerBI_User'
+    LOGIN_NAME = 'PowerBI User'
+    DEFAULT_ROLE = 'ACCOUNTADMIN'
+    DEFAULT_WAREHOUSE = 'COMPUTE_WH'
+    MUST_CHANGE_PASSWORD = TRUE;
+
+-- GRANT IT ACCOUNTADMIN ACCESS
+grant role accountadmin to user Test_PowerBI_User;
+
+
+select * from encounters;
