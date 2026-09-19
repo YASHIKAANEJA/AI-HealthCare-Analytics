@@ -5,6 +5,10 @@
 
 ---
 
+## View the Streamlit App
+https://healthcare-a6swlzlfmvs5uz2wabueuv.streamlit.app/
+
+---
 ## 📌 Project Overview
 CareLens AI is an end-to-end healthcare analytics platform designed to transform complex healthcare data into meaningful business insights.
 
