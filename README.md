@@ -1,7 +1,7 @@
 # 🏥 CareLens AI
 ### AI-Powered Healthcare Analytics & Business Intelligence Platform
 
-## See healthcare data through an intelligent lens.
+### See healthcare data through an intelligent lens.
 
 ---
 
@@ -13,21 +13,8 @@ The project combines cloud data warehousing, SQL analytics, Python, Business Int
 Users can explore healthcare data through interactive Power BI dashboards and interact with the data using Natural Language through an AI-powered Streamlit application.
 
 🔄 The journey
-📂 Healthcare Data
-       ↓
-❄️ Snowflake
-       ↓
-🧮 SQL / SnowSQL
-       ↓
-🧹 Data Cleaning & Transformation
-       ↓
-📊 Power BI Analytics
-       ↓
-🤖 AI / LLM Layer
-       ↓
-🎈 Streamlit Application
-       ↓
-💡 Actionable Healthcare Insights
+
+📂 Healthcare Data -> ❄️ Snowflake -> 🧮 SQL / SnowSQL -> 🧹 Data Cleaning & Transformation -> 📊 Power BI Analytics -> 🤖 AI / LLM Layer -> 🎈 Streamlit Application -> 💡 Actionable Healthcare Insights
 
 ---
 
@@ -241,7 +228,7 @@ The project answers several healthcare analytics questions, including:
 
 The project includes **4 interactive Power BI dashboards** designed to provide different perspectives of healthcare operations.
 
-### Dashboard 1 — Healthcare Overview
+### Dashboard 1 — Hospital Performance Overview
 
 Provides a high-level summary of the healthcare system.
 
@@ -254,9 +241,11 @@ Key metrics include:
 * Payer Coverage
 * Average Encounter Cost
 
+See here -> https://github.com/YASHIKAANEJA/AI-HealthCare-Analytics/blob/main/Hospital%20Performance%20Overview.png
+
 ---
 
-### Dashboard 2 — Patient & Encounter Analytics
+### Dashboard 2 — Patient Demographics
 
 Focuses on patient activity and healthcare utilization.
 
@@ -269,9 +258,11 @@ Includes:
 * Encounters by year/month
 * Patient activity
 
+See Here -> https://github.com/YASHIKAANEJA/AI-HealthCare-Analytics/blob/main/Patient%20Demographics.png
+
 ---
 
-### Dashboard 3 — Cost & Procedure Analytics
+### Dashboard 3 — Clinical and Operational Analytics
 
 Focuses on healthcare expenditure.
 
@@ -284,9 +275,11 @@ Includes:
 * Procedure volume
 * Cost comparisons
 
+See here -> https://github.com/YASHIKAANEJA/AI-HealthCare-Analytics/blob/main/Clinical%20and%20Operational%20Analytics.png
+
 ---
 
-### Dashboard 4 — Payer & Operational Analytics
+### Dashboard 4 — Financial & Operational Analytics
 
 Focuses on insurance and healthcare operations.
 
@@ -298,6 +291,8 @@ Includes:
 * Insurance contribution
 * Operational trends
 * Healthcare utilization patterns
+
+See here -> https://github.com/YASHIKAANEJA/AI-HealthCare-Analytics/blob/main/Financial%20%26%20Insurance%20Analytics.png
 
 ---
 
@@ -538,132 +533,6 @@ A Streamlit application was developed to provide an interactive Natural Language
 
 ---
 
-# 📁 Project Structure
-
-```text
-AI-Healthcare-Analytics/
-│
-├── app/
-│   └── main.py
-│
-├── data/
-│   └── healthcare_data.csv
-│
-├── sql/
-│   ├── data_analysis.sql
-│   ├── healthcare_kpis.sql
-│   └── healthcare_queries.sql
-│
-├── python/
-│   ├── data_cleaning.py
-│   └── exploratory_analysis.py
-│
-├── powerbi/
-│   └── healthcare_dashboard.pbix
-│
-├── screenshots/
-│   ├── dashboard_1.png
-│   ├── dashboard_2.png
-│   ├── dashboard_3.png
-│   └── dashboard_4.png
-│
-├── requirements.txt
-│
-├── .gitignore
-│
-└── README.md
-```
-
-> **Note:** Update the folder/file names above to match the exact structure of your GitHub repository.
-
----
-
-# ⚙️ Installation & Setup
-
-## 1. Clone the Repository
-
-```bash
-git clone https://github.com/YOUR-USERNAME/AI-Healthcare-Analytics.git
-```
-
-```bash
-cd AI-Healthcare-Analytics
-```
-
----
-
-## 2. Create a Virtual Environment
-
-```bash
-python -m venv .venv
-```
-
-### Windows
-
-```bash
-.venv\Scripts\activate
-```
-
-### Linux / macOS
-
-```bash
-source .venv/bin/activate
-```
-
----
-
-## 3. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 4. Configure OpenRouter API
-
-Create an environment variable for your OpenRouter API key.
-
-Example:
-
-```text
-OPENROUTER_API_KEY=your_api_key_here
-```
-
-**Never commit your API key to GitHub.**
-
-Add your environment file to `.gitignore`:
-
-```text
-.env
-.streamlit/secrets.toml
-```
-
----
-
-## 5. Run the Streamlit Application
-
-```bash
-streamlit run app/main.py
-```
-
-The application will open in your browser.
-
----
-
-# 🔐 Security
-
-This project uses API credentials for AI functionality.
-
-For security:
-
-* API keys are stored as environment variables.
-* `.env` files should not be uploaded to GitHub.
-* Secrets should never be hard-coded inside Python files.
-* Sensitive healthcare information should not be uploaded to public repositories.
-
----
-
 # 🚀 Future Improvements
 
 Potential future improvements include:
@@ -778,21 +647,35 @@ It combines traditional **Data Analytics and Business Intelligence** with modern
 
 ---
 
-# 👩‍💻 Author
+🎓 Skills Demonstrated
+📊 Data Analytics
 
-**Yashika Aneja**
+Data Cleaning • EDA • Data Transformation • KPI Development • Business Analysis • Insight Generation
 
-B.Tech Computer Science Engineering Student
-Aspiring Data Analyst | Business Intelligence | AI Analytics
+🧮 SQL
 
-### Areas of Interest
+Joins • Aggregations • CTEs • Date Analysis • Data Transformation • Analytical Queries
 
-`Data Analytics` • `Business Intelligence` • `SQL` • `Power BI` • `Python` • `AI Analytics` • `Data Visualization`
+📊 Business Intelligence
 
----
+Power BI • Dashboard Development • Data Modeling • KPI Tracking • Interactive Visualization
 
-# ⭐ If You Find This Project Interesting
+❄️ Data Warehousing
 
-Feel free to explore the repository, review the dashboards, and experiment with the AI-powered analytics application.
+Snowflake • SnowSQL • Cloud Data Warehousing • Relational Data Modeling
 
-**If you find the project useful, consider giving the repository a ⭐ star!**
+🐍 Programming
+
+Python • Pandas • NumPy • Matplotlib
+
+🤖 AI
+
+LLMs • OpenRouter • Natural Language Analytics • Prompt Engineering • AI-powered Data Analysis
+
+🌐 Application Development
+
+Streamlit • Interactive Web Apps • API Integration
+
+🔧 Development Tools
+
+Git • GitHub • GitHub Codespaces
